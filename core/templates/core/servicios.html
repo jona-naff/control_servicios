@@ -1,0 +1,129 @@
+{% extends 'core/base.html' %}
+
+
+{% block content %}
+
+{% load static %}
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Avalúos</title>
+    <link rel="stylesheet" href="{% static 'styles/main.css' %}">
+    <script src="{% static 'js/servicios.js' %}">
+    </script>
+    <script src="{% static 'js/jquery-1.12.3.js' %}">
+    </script>
+</head>
+
+<br>
+
+<div align="center">
+<h1>Control de servicios</h1>
+
+<table>
+  <tr>
+    <td>Clientes</td>
+    <td>
+      <select name="clienteid" id="clientesCombo">
+        <option value="0" selected>Todos los clientes</option>
+        {% for cliente in clientes %} 
+          <option value="{{cliente.clienteid}}" >{{cliente.nombre}}</option>
+        {% endfor %}
+      </select>
+    </td>
+  </tr>
+  <tr>
+    <td>Tipos</td>
+    <td>
+      <select name="tipoid" id="tiposCombo">
+        <option value="0" selected>Todos los tipos</option>
+        {% for tipo in tipos %} 
+          <option value="{{tipo.tipoid}}">{{tipo.display}}</option>
+        {% endfor %}
+      </select>
+    </td>
+  </tr>
+  <tr>
+    <td>Valuadores</td>
+    <td>
+      <select name="valuadorid" id="valuadoresCombo">
+        <option value="0" selected>Todos los valuadores</option>
+        {% for valuador in valuadores %} 
+          <option value="{{valuador.valuadorid}}">{{valuador.display}}</option>
+        {% endfor %}
+      </select>
+    </td>
+  </tr>
+  <tr>
+    <td>Estatus</td>
+    <td>
+      <select name="estatusid" id="estatusCombo">
+        <option value="0" selected>Todos los estatus</option>
+        {% for estatu in estatus %} 
+          <option value="{{estatu.estatusid}}">{{estatu.nombre}}</option>
+        {% endfor %}
+      </select>
+    </td>
+  </tr>
+</table>
+</div>
+
+<div align="center" name="ubicacion" id="ubicacionid">
+<h2>Ubicación</h2>
+<table>
+  <tr>
+    <td>Estado</td>
+    <td>
+      <select id="estadosCombo" onchange="cambiaMunicipios(this.value)" >
+       <option value="0" selected>Todos los estados</option>
+       {% for estado in estados %}
+        <option value="{{estado.estadoid}}">{{estado.nombre}}</option> 
+       {% endfor %}
+      </select>
+
+    </td>
+  </tr>
+  <tr>
+    <td>Municipio</td>
+    <td>
+      <div id="sel_municipios" nombre="sel_municipios"></div>
+    </td>
+  </tr>
+  <tr>
+    <td>Colonia</td>
+    <td>
+      <div id="sel_colonias" nombre="sel_colonias"></div>
+    </td>
+  </tr>
+</table>
+</div>
+
+
+
+<div align="center">
+<h2>Servicios</h2>
+  <table>
+      <tr>
+        <th>Rep.</th>
+        <th>Id</th>
+        <th>Ubicación</th>
+        <th>Fechas</th>
+        <th>Clientes</th>
+      </tr>
+      {% for items in iterador %}
+      <tr>
+        <td><input type="checkbox" id="chk_{{serv.avaluoid}}"></input></td>
+        {% for item in items %}
+          <td>{{item}}</td>
+        {% endfor %}
+      </tr>
+      {% endfor %}
+    </table>
+</div>
+
+
+
+{% endblock %}

@@ -1,0 +1,31 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Avalúos</title>
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+</head>
+
+<body>
+  <h2>Inicio</h2>
+  <ul>
+    <li><a href="{% url 'home' %}">Inicio</a></li>
+    <li><a href="{% url 'servicios' %}">Servicios</a></li>
+
+    {% if request.user.is_authenticated %}
+      <li><a href={% url 'exit' %}>Salir</a></li>
+    {% else %}
+      <li><a href={% url 'login' %}>Ingresar</a></li>
+    {% endif %}
+  </ul>
+
+  {% block content %}{% endblock %}
+  
+</body>
+
+</html>
